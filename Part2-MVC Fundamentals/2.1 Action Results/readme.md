@@ -1,25 +1,63 @@
-### MVC IN ACTION
+# Action Results
+- is the parent of what does controller returns
+
+```
+
+
+using System.Web.Mvc;
+using Vidly.Models;
+
+namespace Vidly.Controllers
+{
+    public class MoviesController : Controller
+    {
+        // GET
+        public ActionResult Random()
+        {
+            var movie = new Movie(){Name="Batman Begins"}; // created an object
+          return View(movie); // a object of movie is passed to View this will be returned on soon to be create View folder.
+
+        }
+    }
+}
+
+```
+- **return View(movie)** is a child of the **ActionResult**
+
+## other two form of Action results return
+- HttpNotFound()
+- RedirectToAction()
+***
+##  HttpNotFound()
+- just returns a page showing no result was found
+
+
+```
+using System.Web.Mvc;
+using Vidly.Models;
+
+namespace Vidly.Controllers
+{
+    public class MoviesController : Controller
+    {
+        // GET
+        public ActionResult Random()
+        {
+            var movie = new Movie(){Name="Batman Begins"}; // created an object
+            return HttpNotFound();
+        }
+    }
+}
+
+
+```
+- ![homepage](img/notfound.PNG)
+    - result was not found
+    - in the addressbar it is clearly show **http://localhost:5000/movies/random** where it shows no results. 
+    - this is due to 404 results not found 
 ---
-1. Create class in Models folder
-  - ![navigationpage](img/ModelClass.PNG)
-
-  ```
-  namespace Vidly.Models
-  {
-      public class Movie
-      {
-          public int Id { get; set; }
-          public string Name { get; set; }
-      }
-      // this is a basic class when
-  }
-  ```
-- this is a plain old class
-- does not have any behaviour or state
-2. Create a Controller in Controller folder
-  - controller is responsible for dealing with movie class
-  - it will present the project in html form
-  -  ![navigationpage](img/movieControlelr.PNG)
+# RedirectToAction()    
+- this will redirect page to a different site 
 
 ```
 using System.Web.Mvc;
@@ -32,71 +70,33 @@ namespace Vidly.Controllers
         // GET
         public ActionResult Random()
         {
-            var movie = new Movie(){Name="Batman Begins"}; // created an object
-            return View(movie); // a object of movie is passed to View this will be returned on soon to be create View folder.
+            var movie = new Movie(){Name="Batman Begins"}; // created an object 
+            return RedirectToAction("Index", "Home",new {page=1,sortBy="name"});
+            //index is action name 
+            // Home is the controller 
+            // new is the annonymous object here 
+            
+            
         }
     }
 }
 
-```
-3. Create View for the MoviesController
-   - the View folder with name **Movies** will be created
-  - if it was MovieController the folder name would be **Movie** instead of **Movies**  
-  - ![navigationpage](img/Views.PNG)
-      - inside there is a file name **Random.cshtml**
-      - this created due to Action result function name inside MoviesController class
-      ```
-      using System.Web.Mvc;
-      using Vidly.Models;
 
-      namespace Vidly.Controllers
-      {
-          public class MoviesController : Controller
-          {
-              // GET
-              public ActionResult Random()
-              {
-                  var movie = new Movie(){Name="Batman Begins"}; // created an object
-                  return View(movie); // a object of movie is passed to View this will be returned on soon to be create View folder.
-              }
-          }
-      }
-      ```
-      in here clearly there is a Action resulltName Random()
-      thus to use the page it will be like this movies/random and what ever the result show 
-
-  4. setting up View
-      ```
-     @model Vidly.Models.Movie 
-     <!-- This is required as the model is refering the movie object from MoviesController -->
-     
-     @{
-        
-         Layout = "~/Views/Shared/_Layout.cshtml"; // this is for cs template 
-     }
-     
-     <h2>@Model.Name</h2>
- // this will show the name 
-     ```    
-![navigationpage](img/finalresult.PNG)
-- in the search bar it clearly shows movies/random 
-- also shows the movie title which was created on MoviesController 
 
 ```
-using System.Web.Mvc;
-using Vidly.Models;
+- ![homepage](img/action.PNG)
+   - this is the action from the controller class   return RedirectToAction(**"Index",** "Home",new {page=1,sortBy="name"});
 
-namespace Vidly.Controllers
-{
-    public class MoviesController : Controller
-    {
-        // GET
-        public ActionResult Random()
-        {
-            var movie = new Movie(){Name="Batman Begins"}; // created an object
-            return View(movie); // a object of movie is passed to View this will be returned on soon to be create View folder.
-        }
-    }
-}
-```
- BATMAN BEGINS showed up the webpage 
+- ![homepage](img/html.PNG)
+  - in here Home is the controlelr name from control class 
+  - followed by action which is index in this case 
+  -   return RedirectToAction(**"Index", "Home"**,new {page=1,sortBy="name"}); 
+  - returns **Index** is the action name and **Home** is the controller name 
+
+
+- ![homepage](img/Redirect.PNG)
+  - thus when the page is loaded it will be redirected to here 
+  - **http://localhost:5000/?page=1&sortBy=name**
+  - the URL has the addressbar with the **page=1&sortBy=name** as in the return **RedirectToAction("Index", "Home",new {page=1,sortBy="name"});**  **new anonoynous object page=1 and sortBY = "name"** are passed
+  
+  
