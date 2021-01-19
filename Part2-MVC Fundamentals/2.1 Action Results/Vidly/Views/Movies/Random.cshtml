@@ -1,0 +1,9 @@
+@model Vidly.Models.Movie 
+<!-- This is required as the model is refering the movie object from MoviesController -->
+
+@{
+   
+    Layout = "~/Views/Shared/_Layout.cshtml"; // this is for cs template 
+}
+
+<h2>@Model.Name</h2>

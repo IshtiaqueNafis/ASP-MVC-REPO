@@ -1,0 +1,13 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/modules.xml
+/contentModel.xml
+/projectSettingsUpdater.xml
+/.idea.Vidly.iml
+# Datasource local storage ignored files
+/../../../../../../../../../../../../:\Users\Nafis Ishtiaque\Documents\GitHub\ASP-MVC-REPO\Part1-setup\1.1-What is MVC\Vidly\.idea\.idea.Vidly\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
