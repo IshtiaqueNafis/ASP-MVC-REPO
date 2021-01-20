@@ -1,0 +1,20 @@
+@model System.Collections.Generic.List<Vidly.Models.Customer>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // this is for cs template 
+}
+
+<table>
+    <tr>
+        <th>Movies</th>
+    </tr>
+    @foreach (var customer in Model)
+    {
+        <tr>
+        <td>@Html.ActionLink(@customer.Name,"Details",new {Id=customer.Id})</td>
+        </tr>
+
+    }
+
+</table>
